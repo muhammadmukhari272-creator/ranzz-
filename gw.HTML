@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#05091b">
+<title>RANZZ | Custom & Protect Aplikasi</title>
+<style>
+:root {
+  --cyan: #67e8ff;
+  --blue: #287dff;
+  --purple: #a78bfa;
+  --white: #f5f8ff;
+  --muted: #bdc9e5;
+  --line: rgba(139,190,255,.35);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #030714;
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+#backgroundVideo {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -3;
+  filter: brightness(.43) saturate(1.35);
+  pointer-events: none;
+}
+
+.video-shade {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg,rgba(3,7,20,.4),rgba(3,7,20,.72)),
+    radial-gradient(ellipse at 50% 0%,rgba(37,99,235,.25),transparent 65%);
+}
+
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.12),
+    rgba(255,255,255,.025) 45%,
+    rgba(69,115,255,.08)
+  );
+  border: 1px solid var(--line);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 8px 32px rgba(0,0,0,.2),
+    0 0 20px rgba(37,99,235,.08);
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+}
+
+.container {
+  width: min(1100px,92%);
+  margin: auto;
+}
+
+header {
+  position: sticky;
+  top: 10px;
+  z-index: 100;
+  width: min(1100px,94%);
+  margin: 10px auto 0;
+  border-radius: 20px;
+}
+
+.navbar {
+  min-height: 65px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* LOGO DAN BRAND */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 21px;
+  letter-spacing: 1px;
+  color: var(--cyan);
+  text-shadow: 0 0 20px rgba(103,232,255,.5);
+  white-space: nowrap;
+}
+
+.brand-logo {
+  width: 40px; 
+  height: 40px;
+  border-radius: 50%; /* Membuat logo bulat */
+  object-fit: cover;
+  border: 2px solid var(--line);
+  box-shadow: 0 0 10px rgba(103,232,255,.4);
+  background: #05091b;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.nav-links a {
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #e5edff;
+  transition: .25s;
+}
+
+.nav-links a:hover {
+  background: rgba(83,139,255,.22);
+  color: var(--cyan);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.glass-btn {
+  color: white;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 9px 12px;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.hero {
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  padding: 70px 0 60px;
+}
+
+.hero-content {
+  max-width: 780px;
+}
+
+.eyebrow {
+  color: var(--cyan);
+  letter-spacing: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.hero h1 {
+  font-size: clamp(42px,9vw,82px);
+  line-height: 1.06;
+  margin: 15px 0;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.gradient {
+  color: transparent;
+  background: linear-gradient(90deg,#fff,#67e8ff,#818cf8,#c4b5fd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 16px rgba(37,99,235,.3));
+}
+
+.hero p {
+  max-width: 550px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 19px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  color: white;
+  background: rgba(255,255,255,.07);
+  backdrop-filter: blur(15px);
+  transition: transform .2s,box-shadow .2s;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 22px rgba(37,99,235,.35);
+}
+
+.btn-primary {
+  background: linear-gradient(110deg,rgba(37,99,235,.85),rgba(124,58,237,.75));
+  border-color: rgba(147,197,253,.65);
+  box-shadow: 0 0 22px rgba(37,99,235,.2);
+}
+
+.section {
+  padding: 50px 0;
+  scroll-margin-top: 95px;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.section-heading small {
+  color: var(--cyan);
+  letter-spacing: 3px;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.section-heading h2 {
+  font-size: clamp(26px,5vw,38px);
+  margin: 7px 0;
+  line-height: 1.3;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.service-grid,
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 16px;
+}
+
+.card {
+  border-radius: 22px;
+  padding: 22px;
+  min-width: 0;
+  transition: .25s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(103,232,255,.8);
+  box-shadow: 0 0 28px rgba(37,99,235,.18);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-box {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  font-size: 20px;
+  color: var(--cyan);
+  background: rgba(96,165,250,.13);
+  border: 1px solid var(--line);
+}
+
+.tag {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.06);
+  color: var(--cyan);
+  border-radius: 30px;
+  padding: 5px 9px;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.card h3 {
+  font-size: 16px;
+  margin: 15px 0 7px;
+  line-height: 1.5;
+}
+
+.card p {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  padding: 11px 0;
+  font-size: 12px;
+}
+
+.price-row strong {
+  color: var(--cyan);
+  white-space: nowrap;
+}
+
+.card .btn {
+  width: 100%;
+  margin-top: 17px;
+}
+
+.nego {
+  margin-top: 20px;
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  gap: 13px;
+  align-items: center;
+}
+
+.nego strong {
+  color: var(--cyan);
+}
+
+.nego p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.protect-grid {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 13px;
+}
+
+.protect-card {
+  padding: 22px 12px;
+  text-align: center;
+  border-radius: 19px;
+}
+
+.protect-card .icon-box {
+  margin: 0 auto 12px;
+}
+
+.protect-card strong {
+  display: block;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.protect-card p {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.product-card {
+  border-radius: 20px;
+  padding: 22px;
+}
+
+.product-card h3 {
+  margin: 12px 0 5px;
+}
+
+.product-card p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 15px;
+}
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 18px;
+}
+
+.panel {
+  border-radius: 22px;
+  padding: 22px;
+  min-width: 0;
+}
+
+.panel h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.payment-item {
+  border-radius: 14px;
+  padding: 15px;
+  margin-bottom: 12px;
+}
+
+.payment-item strong {
+  color: var(--cyan);
+  font-size: 13px;
+}
+
+.payment-item p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.form-group {
+  margin-bottom: 13px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  color: white;
+  background: rgba(4,10,28,.7);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  outline: none;
+}
+
+.form-group select option {
+  background: #101936;
+  color: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--cyan);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.full {
+  width: 100%;
+}
+
+.social-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  padding: 25px 0;
+}
+
+.social {
+  min-width: 115px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-radius: 19px;
+  font-size: 12px;
+  font-weight: bold;
+  transition: .2s;
+}
+
+.social:hover {
+  transform: translateY(-4px);
+}
+
+.social-icon {
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 22px;
+}
+
+.social-icon svg {
+  width: 23px;
+  height: 23px;
+  fill: currentColor;
+}
+
+.tiktok .social-icon {
+  background: linear-gradient(135deg,#111827,#334155);
+}
+
+.whatsapp .social-icon {
+  background: #16a34a;
+}
+
+.telegram .social-icon {
+  background: #168bd1;
+}
+
+.channel .social-icon {
+  background: linear-gradient(135deg,#2563eb,#7c3aed);
+}
+
+footer {
+  padding: 25px 0 85px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer strong {
+  color: var(--cyan);
+  font-size: 19px;
+}
+
+.audio-player {
+  position: fixed;
+  z-index: 90;
+  right: 15px;
+  bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px;
+  border-radius: 16px;
+}
+
+.audio-player button {
+  min-width: 38px;
+  min-height: 38px;
+}
+
+.audio-player span {
+  font-size: 11px;
+}
+
+.bottom-nav {
+  display: none;
+}
+
+@media(max-width:800px) {
+  .nav-actions {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3px;
+    padding-top: 10px;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 10px 12px;
+  }
+
+  .service-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+
+  .protect-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+
+  .two-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: 420px;
+    padding: 55px 0;
+  }
+
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    z-index: 80;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: space-around;
+    padding: 9px 2px;
+    background: rgba(5,9,27,.88);
+    border-top: 1px solid var(--line);
+    backdrop-filter: blur(20px);
+  }
+
+  .bottom-nav a {
+    text-align: center;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .bottom-nav span {
+    display: block;
+    font-size: 18px;
+  }
+
+  .audio-player {
+    bottom: 65px;
+  }
+}
+
+@media(max-width:480px) {
+  .service-grid,
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .protect-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+
+  .card {
+    padding: 19px;
+  }
+
+  .hero h1 {
+    font-size: 43px;
+  }
+
+  .social {
+    min-width: 95px;
+  }
+
+  .audio-player {
+    right: 10px;
+    bottom: 66px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND VIDEO -->
+<video id="backgroundVideo" autoplay loop muted playsinline>
+  <source src="https://www.image2url.com/r2/default/videos/1793245200386-3247b7d1-8e50-4890-ae54-b1884954ad1d.mp4" type="video/mp4">
+</video>
+<div class="video-shade"></div>
+
+<header class="glass">
+  <div class="navbar">
+    
+    <!-- LOGO DAN BRAND RANZZ -->
+    <a href="#beranda" class="brand">
+      <!-- ATRIBUT onerror DITAMBAHKAN AGAR JIKA GAMBAR ERROR TIDAK MERUSAK TAMPILAN -->
+      <img src="logo.png" alt="RANZZ Logo" class="brand-logo" onerror="this.style.display='none'">
+      RANZZ
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#beranda">Beranda</a>
+      <a href="#layanan">Jasa</a>
+      <a href="#protect">Protect</a>
+      <a href="#produk">Produk</a>
+      <a href="#pembayaran">Pembayaran</a>
+      <a href="#konfirmasi">Konfirmasi</a>
+      <a href="#sosial">Media Sosial</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="glass-btn" id="soundButton"
+        onclick="toggleSound()" aria-label="Aktifkan suara">🔇</button>
+    </div>
+
+    <button class="glass-btn menu-toggle" id="menuToggle"
+      aria-expanded="false" aria-label="Buka menu">☰</button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="beranda">
+  <div class="container">
+    <div class="hero-content">
+      <span class="eyebrow">WELCOME TO</span>
+      <h1><span class="gradient">RANZZ</span><br>PREMIUM</h1>
+      <p>
+        Solusi terbaik untuk custom dan protect aplikasi kamu.
+        Buat aplikasi lebih keren, unik, dan sesuai keinginan.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#layanan">Lihat Layanan →</a>
+        <a class="btn" href="#konfirmasi">Pesan Sekarang</a>
+        <button class="btn" onclick="toggleSound()" id="heroSound">
+          🔊 Aktifkan Suara
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="layanan">
+  <div class="container">
+    <div class="section-heading">
+      <small>✦ LAYANAN PREMIUM</small>
+      <h2>CUSTOM <span class="gradient">APLIKASI</span></h2>
+      <p>Pilih layanan custom sesuai kebutuhan kamu.</p>
+    </div>
+
+    <div class="service-grid">
+      <article class="card glass">
+        <div class="card-top">
+          <span class="icon-box">▧</span>
+          <span class="tag">GAMBAR</span>
+        </div>
+        <h3>CUSTOM GGMP GAMBAR</h3>
+        <p>Custom gambar untuk tampilan aplikasi.</p>
+        <div class="price-row"><span>Custom biasa</span><strong>Rp15.000</strong></div>
+        <div class="price-row"><span>Full custom</span><strong>Rp25.000</strong></div>
+        <button type="button" class="btn btn-primary"
+          onclick="pesanLayanan('CUSTOM GGMP GAMBAR')">Pesan Sekarang →</button>
+      </article>
+
+      <article class="card glass">
+        <div class="card-top">
+          <span class="icon-box">GIF</span>
+          <span class="tag">ANIMASI</span>
+        </div>
+        <h3>CUSTOM GGMP GIF</h3>
+        <p>Custom animasi GIF untuk aplikasi.</p>
+        <div class="price-row"><span>Custom biasa</span><strong>Rp20.000</strong></div>
+        <div class="price-row"><span>Full custom</span><strong>Rp30.000</strong></div>
+        <button type="button" class="btn btn-primary"
+          onclick="pesanLayanan('CUSTOM GGMP GIF')">Pesan Sekarang →</button>
+      </article>
+
+      <article class="card glass">
+        <div class="card-top">
+          <span class="icon-box">▶</span>
+          <span class="tag">VIDEO</span>
+        </div>
+        <h3>CUSTOM GGMP MP4 / VIDEO</h3>
+        <p>Custom video untuk tampilan aplikasi.</p>
+        <div class="price-row"><span>Custom biasa</span><strong>Rp30.000</strong></div>
+        <div class="price-row"><span>Full custom</span><strong>Rp40.000</strong></div>
+        <button type="button" class="btn btn-primary"
+          onclick="pesanLayanan('CUSTOM GGMP MP4 / VIDEO')">Pesan Sekarang →</button>
+      </article>
+    </div>
+
+    <div class="nego glass">
+      <span style="font-size:28px">💬</span>
+      <div>
+        <strong>HARGA BISA DINEGO!</strong>
+        <p>Hubungi admin untuk konsultasi harga dan detail pesanan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="protect">
+  <div class="container">
+    <div class="section-heading">
+      <small>✦ APPLICATION SECURITY</small>
+      <h2>PROTECT <span class="gradient">APLIKASI</span></h2>
+      <p>Layanan proteksi komponen aplikasi.</p>
+    </div>
+
+    <div class="protect-grid">
+      <article class="protect-card glass">
+        <div class="icon-box">⬡</div>
+        <strong>PROTECT CLASSES.DEX</strong>
+        <p>Proteksi komponen DEX.</p>
+      </article>
+      <article class="protect-card glass">
+        <div class="icon-box">▤</div>
+        <strong>PROTECT ASSETS</strong>
+        <p>Proteksi folder assets.</p>
+      </article>
+      <article class="protect-card glass">
+        <div class="icon-box">▰</div>
+        <strong>PROTECT RES</strong>
+        <p>Proteksi resource aplikasi.</p>
+      </article>
+      <article class="protect-card glass">
+        <div class="icon-box">⚙</div>
+        <strong>PROTECT RESOURCES.ARSC</strong>
+        <p>Proteksi tabel resource.</p>
+      </article>
+    </div>
+
+    <div style="text-align:center;margin-top:22px">
+      <button type="button" class="btn btn-primary"
+        onclick="pesanLayanan('PROTECT APLIKASI')">Konsultasi Protect →</button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="produk">
+  <div class="container">
+    <div class="section-heading">
+      <small>✦ OUR PRODUCTS</small>
+      <h2>PRODUK <span class="gradient">RANZZ</span></h2>
+      <p>Jelajahi layanan custom aplikasi kami.</p>
+    </div>
+
+    <div class="product-grid">
+      <article class="product-card glass">
+        <div class="icon-box">▧</div>
+        <h3>Custom Gambar</h3>
+        <p>Desain gambar sesuai permintaan.</p>
+        <a href="#layanan" class="btn">Lihat Harga →</a>
+      </article>
+      <article class="product-card glass">
+        <div class="icon-box">GIF</div>
+        <h3>Custom GIF</h3>
+        <p>Animasi untuk tampilan aplikasi.</p>
+        <a href="#layanan" class="btn">Lihat Harga →</a>
+      </article>
+      <article class="product-card glass">
+        <div class="icon-box">▶</div>
+        <h3>Custom Video</h3>
+        <p>Video MP4 untuk aplikasi.</p>
+        <a href="#layanan" class="btn">Lihat Harga →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pembayaran">
+  <div class="container">
+    <div class="section-heading">
+      <small>✦ PAYMENT</small>
+      <h2>PEMBAYARAN</h2>
+      <p>Hubungi admin untuk mengetahui metode pembayaran.</p>
+    </div>
+
+    <div class="panel glass">
+      <div class="payment-item glass">
+        <strong>▣ Transfer Bank / E-Wallet</strong>
+        <p>Konfirmasi nomor pembayaran kepada admin sebelum transfer.</p>
+      </div>
+      <div class="payment-item glass">
+        <strong>✓ Konfirmasi Pesanan</strong>
+        <p>Pastikan layanan dan harga sudah disepakati.</p>
+      </div>
+      <button type="button" class="btn btn-primary full"
+        onclick="pesanLayanan('INFORMASI PEMBAYARAN')">Tanya Admin →</button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="konfirmasi">
+  <div class="container">
+    <div class="section-heading">
+      <small>✦ ORDER FORM</small>
+      <h2>KONFIRMASI <span class="gradient">PESANAN</span></h2>
+      <p>Isi detail pesanan untuk menghubungi admin.</p>
+    </div>
+
+    <form class="panel glass" id="orderForm">
+      <div class="form-group">
+        <label for="nama">Nama kamu</label>
+        <input id="nama" name="nama" required placeholder="Masukkan nama">
+      </div>
+
+      <div class="form-group">
+        <label for="layananPilihan">Pilih layanan</label>
+        <select id="layananPilihan" name="layanan" required>
+          <option value="">-- Pilih layanan --</option>
+          <option>Custom GGMP Gambar - Biasa Rp15.000</option>
+          <option>Custom GGMP Gambar - Full Rp25.000</option>
+          <option>Custom GGMP GIF - Biasa Rp20.000</option>
+          <option>Custom GGMP GIF - Full Rp30.000</option>
+          <option>Custom GGMP MP4/Video - Biasa Rp30.000</option>
+          <option>Custom GGMP MP4/Video - Full Rp40.000</option>
+          <option>Protect Classes.dex</option>
+          <option>Protect Assets</option>
+          <option>Protect RES</option>
+          <option>Protect Resources.arsc</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="catatan">Catatan pesanan</label>
+        <textarea id="catatan" name="catatan"
+          placeholder="Tuliskan detail custom yang kamu inginkan"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary full">
+        Kirim Pesanan ke WhatsApp →
+      </button>
+    </form>
+  </div>
+</section>
+
+<section class="section" id="sosial">
+  <div class="container">
+    <div class="section-heading">
+      <small>✦ CONNECT WITH US</small>
+      <h2>MEDIA SOSIAL <span class="gradient">RANZZ</span></h2>
+      <p>Ikuti media sosial dan saluran resmi kami.</p>
+    </div>
+
+    <div class="social-row">
+      <a class="social glass tiktok"
+        href="https://www.tiktok.com/@rannzlipe?_r=1&_t=ZS-9BLTcNhsXxQ"
+        target="_blank" rel="noopener noreferrer">
+        <span class="social-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19.6 7.2a6.7 6.7 0 0 1-4.1-1.4v8.1a6.2 6.2 0 1 1-5.4-6.1v3.3a2.9 2.9 0 1 0 2.1 2.8V2.5h3.3a6.8 6.8 0 0 0 4.1 4.7z"/>
+          </svg>
+        </span>
+        TikTok
+      </a>
+
+      <a class="social glass whatsapp"
+        href="https://wa.me/6283166653080"
+        target="_blank" rel="noopener noreferrer">
+        <span class="social-icon">☏</span>
+        WhatsApp
+      </a>
+
+      <a class="social glass channel"
+        href="https://whatsapp.com/channel/0029Vb9hBmi1nozDjGgMZ03l"
+        target="_blank" rel="noopener noreferrer">
+        <span class="social-icon">◉</span>
+        Saluran WhatsApp
+      </a>
+
+      <a class="social glass telegram"
+        href="#"
+        target="_blank" rel="noopener noreferrer">
+        <span class="social-icon">➤</span>
+        Telegram
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <strong>✦ RANZZ</strong>
+    <p>Custom • Protect • Premium</p>
+    <p style="margin-top:10px">
+      © <span id="year"></span> RANZZ. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<nav class="bottom-nav">
+  <a href="#beranda"><span>⌂</span>Beranda</a>
+  <a href="#layanan"><span>✦</span>Jasa</a>
+  <a href="#protect"><span>⬡</span>Protect</a>
+  <a href="#sosial"><span>◎</span>Sosial</a>
+  <a href="#konfirmasi"><span>✓</span>Pesan</a>
+</nav>
+
+<div class="audio-player glass">
+  <button type="button" class="glass-btn"
+    onclick="toggleSound()" id="audioButton"
+    aria-label="Aktifkan atau matikan suara">🔇</button>
+  <span id="audioStatus">Suara mati</span>
+</div>
+
+<script>
+const NOMOR_ADMIN = "6283166653080";
+
+const video = document.getElementById("backgroundVideo");
+const soundButton = document.getElementById("soundButton");
+const heroSound = document.getElementById("heroSound");
+const audioButton = document.getElementById("audioButton");
+const audioStatus = document.getElementById("audioStatus");
+
+async function toggleSound() {
+  if (!video) return;
+
+  if (video.paused) {
+    try {
+      await video.play();
+    } catch (error) {
+      if (audioStatus) {
+        audioStatus.textContent = "Video gagal diputar";
+      }
+      return;
+    }
+  }
+
+  video.muted = !video.muted;
+  updateSoundUI();
+}
+
+function updateSoundUI() {
+  if (!video) return;
+
+  const aktif = !video.muted;
+
+  if (soundButton) {
+    soundButton.textContent = aktif ? "🔊" : "🔇";
+  }
+
+  if (audioButton) {
+    audioButton.textContent = aktif ? "🔊" : "🔇";
+  }
+
+  if (audioStatus) {
+    audioStatus.textContent = aktif ? "Suara aktif" : "Suara mati";
+  }
+
+  if (heroSound) {
+    heroSound.textContent = aktif
+      ? "🔊 Matikan Suara"
+      : "🔊 Aktifkan Suara";
+  }
+}
+
+function bukaWhatsApp(pesan) {
+  const url = "https://wa.me/" + NOMOR_ADMIN +
+    "?text=" + encodeURIComponent(pesan);
+
+  window.location.href = url;
+}
+
+function pesanLayanan(nama) {
+  bukaWhatsApp(
+    "Halo Admin RANZZ!\n\n" +
+    "Saya ingin memesan layanan: " + nama + "\n" +
+    "Mohon informasi lebih lanjut. Terima kasih."
+  );
+}
+
+const orderForm = document.getElementById("orderForm");
+
+if (orderForm) {
+  orderForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const nama = document.getElementById("nama").value.trim();
+    const layanan = document.getElementById("layananPilihan").value;
+    const catatan = document.getElementById("catatan").value.trim();
+
+    if (!nama || !layanan) {
+      alert("Silakan isi nama dan pilih layanan.");
+      return;
+    }
+
+    bukaWhatsApp(
+      "Halo Admin RANZZ!\n\n" +
+      "KONFIRMASI PESANAN\n" +
+      "Nama: " + nama + "\n" +
+      "Layanan: " + layanan + "\n" +
+      "Catatan: " + (catatan || "-") + "\n\n" +
+      "Mohon konfirmasi pesanan saya."
+    );
+  });
+}
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener("click", function() {
+    const terbuka = navLinks.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(terbuka));
+  });
+
+  navLinks.querySelectorAll("a").forEach(function(link) {
+    link.addEventListener("click", function() {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
+const yearElement = document.getElementById("year");
+
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
+}
+
+updateSoundUI();
+</script>
+</body>
+</html>
